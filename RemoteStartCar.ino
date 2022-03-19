@@ -208,33 +208,6 @@ void leGSM()
   }
 }
 
-void leGPS() {
-  unsigned long delayGPS = millis();
-
-  serialGPS.listen();
-  bool lido = false;
-  while ( (millis() - delayGPS) < 500 ) {
-    while (serialGPS.available()) {
-      char cIn = serialGPS.read();
-      lido = gps.encode(cIn);
-    }
-
-    if (lido) {
-      float flat, flon;
-      unsigned long age;
-
-      gps.f_get_position(&flat, &flon, &age);
-
-      String urlMapa = "Local Identificado: https://maps.google.com/maps/?&z=10&q=";
-      urlMapa += String(flat, 6);
-      urlMapa += ",";
-      urlMapa += String(flon, 6);
-      Serial.println(urlMapa);
-
-      break;
-    }
-  }
-}
 
 void enviaSMS(String telefone, String mensagem) {
   serialGSM.print("AT+CMGS=\"" + telefone + "\"\n");
