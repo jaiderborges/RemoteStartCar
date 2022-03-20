@@ -1,10 +1,6 @@
 #include <SoftwareSerial.h>
-#include <TinyGPS.h>
 
 SoftwareSerial serialGSM(10, 11); // RX, TX
-SoftwareSerial serialGPS(6, 7);
-
-TinyGPS gps;
 
 bool temSMS = false;
 String telefoneSMS;
@@ -12,17 +8,16 @@ String dataHoraSMS;
 String mensagemSMS;
 String comandoGSM = "";
 String ultimoGSM = "";
-uint8_t REL1 = 2; //Conexao RELE 1
-uint8_t REL2 = 3; //Conexao RELE 2
-uint8_t REL3 = 5; //Conexao RELE 4
-uint8_t REL4 = 4; //Conexao RELE 3
+uint8_t REL1 = 2; //Conexao PIN 2
+uint8_t REL2 = 3; //Conexao PIN 3
+uint8_t REL3 = 5; //Conexao PIN 5
+uint8_t REL4 = 4; //Conexao PIN 4
 #define FREIO 9
 #define CARON 8
 #define COM1 "UnlockCar"
 #define COM2 "LockCar"
 #define COM3 "StartCar"
 #define COM4 "MyGps"
-
 
 void leGSM();
 void leGPS();
@@ -51,7 +46,6 @@ void setup() {
   Serial.println("Sketch Iniciado!");
   configuraGSM();
 
-  leGPS();
 }
 
 void loop() {
@@ -88,26 +82,7 @@ void loop() {
     Serial.println();
 
     mensagemSMS.trim();
-    if ( mensagemSMS == COM4 ) {
-      Serial.println("Enviando SMS de Resposta.");
-      leGPS();
-
-      float flat, flon;
-      unsigned long age;
-
-      gps.f_get_position(&flat, &flon, &age);
-
-      if ( (flat == TinyGPS::GPS_INVALID_F_ANGLE) || (flon == TinyGPS::GPS_INVALID_F_ANGLE) ) {
-        enviaSMS(telefoneSMS, "GPS WITHOUT SIGNAL  !!!");
-      } else {
-        String urlMapa = "Local Identificado: https://maps.google.com/maps/?&z=10&q=";
-        urlMapa += String(flat, 6);
-        urlMapa += ",";
-        urlMapa += String(flon, 6);
-
-        enviaSMS(telefoneSMS, urlMapa);
-      }
-    }
+  
     //Desbloqueia as portas do carro
     if ( mensagemSMS == COM1) {
       Serial.println("Enviando SMS de Resposta.");
@@ -208,13 +183,11 @@ void leGSM()
   }
 }
 
-
 void enviaSMS(String telefone, String mensagem) {
   serialGSM.print("AT+CMGS=\"" + telefone + "\"\n");
   serialGSM.print(mensagem + "\n");
   serialGSM.print((char)26);
 }
-
 
 void configuraGSM() {
   serialGSM.print("AT+CMGF=1\n;AT+CNMI=2,2,0,0,0\n;ATX4\n;AT+COLP=1\n");
