@@ -19,7 +19,6 @@ uint8_t REL4 = 4; //Conexao PIN 4
 #define COM4 "MyGps"
 
 void leGSM();
-void leGPS();
 void enviaSMS(String telefone, String mensagem);
 void configuraGSM();
 void (*funcReset)() = 0;
@@ -33,7 +32,6 @@ void setup() {
   digitalWrite(REL3, LOW); //PIN 5
   digitalWrite(REL4, LOW); //PIN 4
   Serial.begin(9600);
-  serialGPS.begin(9600);
   serialGSM.begin(9600);
 
   pinMode(REL1, OUTPUT);
