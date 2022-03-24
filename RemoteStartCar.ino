@@ -22,6 +22,7 @@ void leGSM();
 void leGPS();
 void enviaSMS(String telefone, String mensagem);
 void configuraGSM();
+void (*funcReset)() = 0;
 
 unsigned long delay2 = 0;
 
@@ -103,6 +104,11 @@ void loop() {
       delay(2000);
       digitalWrite(REL4, LOW);
       enviaSMS(telefoneSMS, "Ariana seu carro foi ligado!!!");
+    }
+    //Renicia o arduino automaticamente
+    if (millis() - delay2) > 10000) {
+      Serial.println ("O Arduino foi Reniciado com sucesso.");
+      funcReset();
     }
 
     temSMS = false;
