@@ -45,12 +45,6 @@ void setup() {
 }
 
 void loop() {
-  static unsigned long delayLeGPS = millis();
-
-  if ( (millis() - delayLeGPS) > 10000 ) {
-    leGPS();
-    delayLeGPS = millis();
-  }
 
   leGSM();
 
