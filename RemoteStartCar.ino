@@ -12,8 +12,7 @@ uint8_t REL1 = 2; //Conexao PIN 2
 uint8_t REL2 = 3; //Conexao PIN 3
 uint8_t REL3 = 5; //Conexao PIN 5
 uint8_t REL4 = 4; //Conexao PIN 4
-#define FREIO 9
-#define CARON 8
+
 #define COM1 "UnlockCar"
 #define COM2 "LockCar"
 #define COM3 "StartCar"
@@ -28,16 +27,14 @@ unsigned long delay2 = 0;
 
 void setup() {
 
-  digitalWrite(REL1, LOW);
-  digitalWrite(REL2, LOW);
-  digitalWrite(REL3, LOW);
-  digitalWrite(REL4, LOW);
+  digitalWrite(REL1, LOW); //PIN 2
+  digitalWrite(REL2, LOW); //PIN 3
+  digitalWrite(REL3, LOW); //PIN 5
+  digitalWrite(REL4, LOW); //PIN 4
   Serial.begin(9600);
   serialGPS.begin(9600);
   serialGSM.begin(9600);
 
-  pinMode(FREIO, INPUT_PULLUP); //Quando acionar o freio desliga o carro e obriga a ligar pela chave.
-  pinMode(CARON, INPUT_PULLUP); //Se o carro estiver ligado, mesmo que receba o SMS, nao executa o comando.
   pinMode(REL1, OUTPUT);
   pinMode(REL2, OUTPUT);
   pinMode(REL3, OUTPUT);
