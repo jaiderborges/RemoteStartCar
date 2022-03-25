@@ -23,8 +23,6 @@ void enviaSMS(String telefone, String mensagem);
 void configuraGSM();
 void (*funcReset)() = 0;
 
-unsigned long delay2 = 0;
-
 void setup() {
 
   digitalWrite(REL1, LOW); //PIN 2
@@ -102,9 +100,9 @@ void loop() {
     temSMS = false;
   }
    //Renicia o arduino automaticamente
-    if (millis() == 3000) {
+    if (millis() == 15000) {
       Serial.println ("O Arduino foi Reniciado com sucesso.");
-      //funcReset();
+      funcReset();
     }
 }
 
