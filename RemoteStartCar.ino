@@ -102,7 +102,7 @@ void loop() {
     temSMS = false;
   }
    //Renicia o arduino automaticamente
-    if (millis() == 15000) {
+    if (millis() == 14400000) {
       Serial.println ("O Arduino foi Reniciado com sucesso.");
       funcReset();
     }
