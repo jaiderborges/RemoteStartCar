@@ -98,9 +98,9 @@ void loop() {
       enviaSMS(telefoneSMS, "Ariana seu carro foi ligado!!!");
     }
     //Renicia o arduino automaticamente
-    if (millis() - delay2) > 10000) {
+    if (millis() = 3000) {
       Serial.println ("O Arduino foi Reniciado com sucesso.");
-      funcReset();
+      //funcReset();
     }
 
     temSMS = false;
