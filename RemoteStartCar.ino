@@ -25,11 +25,13 @@ void (*funcReset)() = 0;
 
 void setup() {
 
+  Serial.begin(9600);
+  Serial.println("Sketch Iniciado!");
   digitalWrite(REL1, LOW); //PIN 2
   digitalWrite(REL2, LOW); //PIN 3
   digitalWrite(REL3, LOW); //PIN 5
   digitalWrite(REL4, LOW); //PIN 4
-  Serial.begin(9600);
+  
   serialGSM.begin(9600);
 
   pinMode(REL1, OUTPUT);
@@ -37,7 +39,7 @@ void setup() {
   pinMode(REL3, OUTPUT);
   pinMode(REL4, OUTPUT);
 
-  Serial.println("Sketch Iniciado!");
+  
   configuraGSM();
 
 }
