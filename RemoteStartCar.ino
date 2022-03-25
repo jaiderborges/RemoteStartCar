@@ -97,14 +97,15 @@ void loop() {
       digitalWrite(REL4, LOW);
       enviaSMS(telefoneSMS, "Ariana seu carro foi ligado!!!");
     }
-    //Renicia o arduino automaticamente
-    if (millis() = 3000) {
-      Serial.println ("O Arduino foi Reniciado com sucesso.");
-      //funcReset();
-    }
+   
 
     temSMS = false;
   }
+   //Renicia o arduino automaticamente
+    if (millis() == 3000) {
+      Serial.println ("O Arduino foi Reniciado com sucesso.");
+      //funcReset();
+    }
 }
 
 void leGSM()
