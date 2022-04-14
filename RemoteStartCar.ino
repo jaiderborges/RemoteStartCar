@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>
 
-SoftwareSerial serialGSM(10, 11); // RX, TX
+SoftwareSerial serialGSM(10, 11); // RX, TX.
 
 bool temSMS = false;
 String telefoneSMS;
